@@ -1,6 +1,8 @@
 import io.restassured.RestAssured;
 import org.junit.Test;
 
+import javax.swing.plaf.synth.SynthOptionPaneUI;
+
 import static io.restassured.RestAssured.given;
 
 public class Tests {
@@ -24,5 +26,16 @@ public class Tests {
                 .when().get("https://playground.learnqa.ru/api/long_redirect")
                 .then()
                 .statusCode(302);
+    }
+
+    @Test
+    public void longRedirectV2() {
+        String url = "https://playground.learnqa.ru/api/long_redirect";
+        while (given().redirects().follow(false).get(url).statusCode() != 200) {
+            String tempUrl = given().redirects().follow(false).get(url).getHeader("Location");
+            System.out.println("redirect to: " + tempUrl);
+            url = tempUrl;
+        }
+
     }
 }
