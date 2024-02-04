@@ -61,4 +61,10 @@ public class Tests {
 
         Assert.assertEquals("Job is ready", jsonResult.getString("status"));
     }
+
+    @Test
+    public void stringLengthTest() {
+        String var = "sgfdhshdfgsd";
+        Assert.assertEquals(12, var.length());
+    }
 }
