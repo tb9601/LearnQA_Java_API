@@ -5,6 +5,10 @@ import org.junit.Test;
 
 import javax.swing.plaf.synth.SynthOptionPaneUI;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 import static io.restassured.RestAssured.given;
 
 public class Tests {
@@ -66,5 +70,11 @@ public class Tests {
     public void stringLengthTest() {
         String var = "sgfdhshdffdggfssdfgd";
         Assert.assertTrue(var.length() > 15);
+    }
+
+    @Test
+    public void cookieTest() {
+        Map<String, String> actualCookies = given().get("https://playground.learnqa.ru/api/homework_cookie").getCookies();
+        Assert.assertEquals(Collections.singletonMap("HomeWork", "hw_value"), actualCookies);
     }
 }
