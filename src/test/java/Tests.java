@@ -1,4 +1,6 @@
 import io.restassured.RestAssured;
+import io.restassured.http.Header;
+import io.restassured.http.Headers;
 import io.restassured.path.json.JsonPath;
 import org.junit.Assert;
 import org.junit.Test;
@@ -76,5 +78,13 @@ public class Tests {
     public void cookieTest() {
         Map<String, String> actualCookies = given().get("https://playground.learnqa.ru/api/homework_cookie").getCookies();
         Assert.assertEquals(Collections.singletonMap("HomeWork", "hw_value"), actualCookies);
+    }
+
+    @Test
+    public void headerTest() {
+        Header excpectedHeader = new Header("x-secret-homework-header", "Some secret value");
+        Headers headers = given().get("https://playground.learnqa.ru/api/homework_header").getHeaders();
+        Assert.assertTrue( "headers don't contain header 'x-secret-homework-header'" +
+                " with value 'Some secret value'", headers.asList().contains(excpectedHeader));
     }
 }
