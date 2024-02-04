@@ -64,7 +64,7 @@ public class Tests {
 
     @Test
     public void stringLengthTest() {
-        String var = "sgfdhshdfgsd";
-        Assert.assertEquals(12, var.length());
+        String var = "sgfdhshdfgsdfgd";
+        Assert.assertTrue(var.length() > 15);
     }
 }
